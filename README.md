@@ -10,7 +10,10 @@ After cloning use these commands to compile and install lib_
 - `./gradlew install` -> install the lib in local maven repository
 
 Make use of the installed library by adding it to your **build.gradle** file:
-- `implementation es.ull.hpcg:matrix-lib:0.1.testing` in **dependencies** block
+- `implementation es.ull.hpcg:matrix-lib:<version>` in **dependencies** block
   
 and importing it in you java files like:
 - `import matrix.lib.Matrix;` 
+
+
+## Current version: 0.1
