@@ -34,6 +34,7 @@ public class Matrix {
         int i;
         for (i = 0; i < this.dimension; i++) {
             this.array.add(
+                    // TODO this does not work in Android v4.4.4, API level 19
                     new Random().ints(0, module).findFirst().orElse(0)
             );
         }
