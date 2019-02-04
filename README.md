@@ -16,4 +16,4 @@ and importing it in you java files like:
 - `import matrix.lib.Matrix;` 
 
 
-## Current version: 0.1
+## Current version: 0.2
