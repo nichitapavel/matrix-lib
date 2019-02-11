@@ -3,6 +3,7 @@
 ## Requirements
 - [gradle 5.1](https://gradle.org/releases/)
 - [oracle/open jdk => v1.8_u191](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+(Works with v1.6 too)
 
 ## Instructions
 After cloning use these commands to compile and install lib_
@@ -16,4 +17,4 @@ and importing it in you java files like:
 - `import matrix.lib.Matrix;` 
 
 
-## Current version: 0.2
+## Current version: 0.3

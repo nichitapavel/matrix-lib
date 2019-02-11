@@ -30,20 +30,23 @@ public class Matrix {
             }
     }
 
-    public void fill(int module) {
+    public void fill(int module, TimeController time) {
         int i;
+        time.snapStart();
         for (i = 0; i < this.dimension; i++) {
             this.array.add(
-                    // TODO this does not work in Android v4.4.4, API level 19
+                    // FIXED TODO this does not work in Android v4.4.4, API level 19
                     new Random().nextInt(module)
             );
         }
+        time.snapFinish();
     }
 
-    public Matrix multiply(Matrix matrix) {
+    public Matrix multiply(Matrix matrix, TimeController time) {
         int i, j, k;
         Matrix matrix_computed = new Matrix(this.size);
 
+        time.snapStart();
         for (i = 0; i < this.size; i++) {
             for (j = 0; j < this.size; j++) {
                 int result = 0;
@@ -53,6 +56,7 @@ public class Matrix {
                 matrix_computed.array.add(result);
             }
         }
+        time.snapFinish();
 
         return matrix_computed;
     }
