@@ -23,9 +23,17 @@ public class TimeController {
         this.name = name;
     }
 
+    public long getStart() {
+        return this.start;
+    }
+
+    public long getFinish() {
+        return this.finish;
+    }
+
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss SSS");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss SSSS");
         StringBuilder message = new StringBuilder();
         message.append(this.name)
                 .append("\n")
