@@ -50,7 +50,7 @@ public class MatrixTest {
         }
         TimeController time = new TimeController();
 
-        Matrix matrix_computed = matrix_a.multiply(matrix_b, time);
+        Matrix matrix_computed = matrix_a.multiply(matrix_b);
 
         // assert statements
         assertEquals(
@@ -78,23 +78,21 @@ public class MatrixTest {
 
     @Test
     public void Testfill() {
-        TimeController time = new TimeController();
         Matrix matrix_a = new Matrix(5);
-        matrix_a.fill(40, time);
+        matrix_a.fill(40);
         Matrix matrix_b = new Matrix(5);
-        matrix_b.fill(40, time);
+        matrix_b.fill(40);
 
         assertNotEquals(matrix_a, matrix_b);
     }
 
     @Test(timeout=50000)
     public void TestLargeMatrixMultiplication() {
-        TimeController time = new TimeController();
         Matrix matrix_a = new Matrix(1000);
-        matrix_a.fill(40, time);
+        matrix_a.fill(40);
         Matrix matrix_b = new Matrix(1000);
-        matrix_b.fill(40, time);
+        matrix_b.fill(40);
 
-        Matrix matrix_computed = matrix_a.multiply(matrix_b, time);
+        Matrix matrix_computed = matrix_a.multiply(matrix_b);
     }
 }
