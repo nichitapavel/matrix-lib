@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+// TODO take a look at System.nanoTime() to get better precision
 public class TimeController {
     private long start = 0;
     private long finish = 0;
