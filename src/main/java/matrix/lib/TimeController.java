@@ -33,7 +33,7 @@ public class TimeController {
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss SSSS");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS");
         StringBuilder message = new StringBuilder();
         message.append(this.name)
                 .append("\n")
