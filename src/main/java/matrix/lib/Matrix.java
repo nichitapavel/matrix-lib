@@ -18,7 +18,6 @@ public class Matrix {
         this.size = size;
         this.dimension = size * size;
         this.array = new ArrayList<Integer>(this.dimension);
-
     }
 
     public void set(int[] array_data) throws Exception {
