@@ -15,7 +15,6 @@ public class HTTPDataTest {
         HTTPData req = new HTTPData(base_url);
 
         // TODO assertion is not portable, maybe using mock is a better option
-        assertEquals("pavel-work-ubuntu", req.hostname);
         assertEquals(base_url, req.base_url);
     }
 
@@ -27,8 +26,8 @@ public class HTTPDataTest {
         req.setData(timestamp, Operation.AS);
 
 
-        // TODO assertion is not portable because of device=hostname, maybe using mock is a better option
-        String expected = "http://192.168.0.65:5000/message?device=pavel-work-ubuntu&timestamp=1552388559539&operation=AS";
+        // TODO the device hostname now is dependent of the implementation, this should be heavily refactored
+        String expected = "http://192.168.0.65:5000/message?device=Generic&timestamp=1552388559539&operation=AS";
         assertEquals(expected, req.full_url);
     }
 
