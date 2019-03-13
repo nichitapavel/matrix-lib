@@ -6,16 +6,10 @@ import java.net.*;
 public class HTTPData {
     String base_url;
     String full_url;
-    String hostname;
+    String hostname = "Generic";
 
     public HTTPData(String url) {
         this.base_url = url;
-        try {
-            this.hostname = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            System.out.println("Cannot get hostname");
-            this.hostname = "Generic";
-        }
     }
 
     public void setData(long timestamp, Operation op) {
@@ -33,6 +27,10 @@ public class HTTPData {
                 .append(op);
 
         this.full_url = url.toString();
+    }
+
+    public void setName(String name) {
+        this.hostname = name;
     }
 
     public boolean sendData(){
