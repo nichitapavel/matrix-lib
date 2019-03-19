@@ -10,6 +10,15 @@ public class MatrixFloat extends AMatrix {
         this.array = new ArrayList<Float>(this.dimension);
     }
 
+    public void set(float[] array_data) throws Exception {
+        if (array_data.length != this.dimension)
+            throw new Exception("Matrix dimension and array length does not match.");
+        for (float item : array_data)
+            if (this.array != null) {
+                this.array.add(item);
+            }
+    }
+
     @Override
     public void fill(int module) {
         int i;
@@ -32,7 +41,7 @@ public class MatrixFloat extends AMatrix {
 
         for (i = 0; i < this.size; i++) {
             for (j = 0; j < this.size; j++) {
-                int result = 0;
+                float result = 0;
                 for (k = 0; k < this.size; k++) {
                     result += (float) this.array.get(i*this.size+k) * (float) matrix.array.get(k*this.size+j);
                 }
