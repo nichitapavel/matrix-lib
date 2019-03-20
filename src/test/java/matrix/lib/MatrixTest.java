@@ -93,6 +93,6 @@ public class MatrixTest {
         Matrix matrix_b = new Matrix(1000);
         matrix_b.fill(40);
 
-        Matrix matrix_computed = matrix_a.multiply(matrix_b);
+        matrix_a.multiply(matrix_b);
     }
 }
