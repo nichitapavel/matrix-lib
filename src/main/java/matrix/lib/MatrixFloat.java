@@ -1,5 +1,6 @@
 package matrix.lib;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -41,11 +42,17 @@ public class MatrixFloat extends AMatrix {
 
         for (i = 0; i < this.size; i++) {
             for (j = 0; j < this.size; j++) {
-                float result = 0;
+                float result = 0.0f;
                 for (k = 0; k < this.size; k++) {
                     result += (float) this.array.get(i*this.size+k) * (float) matrix.array.get(k*this.size+j);
                 }
-                matrix_computed.array.add(result);
+                matrix_computed.array.add(
+                        // TODO Evaluate if this is really necessary
+                        BigDecimal.
+                                valueOf(result).
+                                setScale(4, BigDecimal.ROUND_HALF_UP).
+                                floatValue()
+                );
             }
         }
 
