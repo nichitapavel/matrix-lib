@@ -36,11 +36,28 @@ public class MatrixFloatTest {
         MatrixFloat matrix_b = new MatrixFloat(size);
         MatrixFloat matrix_expected = new MatrixFloat(size);
 
-        // TODO Update values to be correct
-        float[] matrix_a_data = {2.35f, 7.25f, 5.78f, 8.0f, 4.0f, 5.0f, 0.0f, 5.0f, 2.0f, 5.0f, 6.0f, 7.0f, 9.0f, 8.0f, 7.0f, 8.0f, 5.0f, 0.0f, 1.0f, 6.0f, 7.0f, 9.0f, 2.0f, 6.0f, 4.0f};
-        float[] matrix_b_data = {2.45f, 2.54f, 0.54f, 3.0f, 4.0f, 0.0f, 0.0f, 0.0f, 2.0f, 0.0f, 1.0f, 2.0f, 4.0f, 3.0f, 2.0f, 3.0f, 0.0f, 0.0f, 1.0f, 1.0f, 2.0f, 4.0f, 2.0f, 1.0f, 4.0f};
-        float[] matrix_expected_data =
-                {41.0f, 30.0f, 28.0f, 47.0f, 42.0f, 31.0f, 40.0f, 30.0f, 37.0f, 52.0f, 59.0f, 58.0f, 50.0f, 74.0f, 78.0f, 31.0f, 40.0f, 12.0f, 41.0f, 57.0f, 42.0f, 34.0f, 16.0f, 55.0f, 54.0f};
+        // FIXED TODO Update values to be correct
+        float[] matrix_a_data = {
+                2.35f, 7.25f, 5.78f, 8.0f, 4.33f,
+                5.81f, 0.0f, 5.27f, 2.85f, 5.33f,
+                6.42f, 7.84f, 9.63f, 8.21f, 7.45f,
+                8.97f, 5.47f, 0.12f, 1.74f, 6.78f,
+                7.99f, 9.37f, 2.0f, 6.45f, 4.18f
+        };
+        float[] matrix_b_data = {
+                2.45f, 2.54f, 0.54f, 3.0f, 4.24f,
+                0.84f, 0.19f, 0.83f, 2.61f, 0.33f,
+                1.71f, 2.49f, 4.18f, 3.99f, 2.23f,
+                3.53f, 0.5f, 0.8f, 1.49f, 1.99f,
+                2.15f, 4.78f, 2.14f, 1.89f, 4.35f
+        };
+        float[] matrix_expected_data = {
+                59.2808f, 46.4361f, 47.1131f, 69.1384f, 60.0014f,
+                44.7662f, 54.7821f, 38.8522f, 52.7775f, 65.2435f,
+                83.7807f, 81.4911f, 72.7384f, 104.4595f, 100.0283f,
+                47.4957f, 57.4003f, 25.7867f, 57.0723f, 73.0611f,
+                62.6218f, 50.2603f, 34.5569f, 73.9164f, 72.4482f
+        };
 
         try {
             matrix_a.set(matrix_a_data);
