@@ -9,6 +9,12 @@ import java.util.Objects;
 import java.util.Random;
 
 
+/**
+ * Something somehtinsa
+ * @deprecated Deprecated as of release 0.5, replaced by {@link AMatrix},
+ * {@link MatrixInt} and {@link MatrixFloat}.
+ */
+@Deprecated
 public class Matrix {
     private final List<Integer> array;
     private final int size;
