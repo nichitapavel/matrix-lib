@@ -14,7 +14,7 @@ Make use of the installed library by adding it to your **build.gradle** file:
 - `implementation es.ull.hpcg:matrix-lib:<version>` in **dependencies** block
   
 and importing it in you java files like:
-- `import matrix.lib.Matrix;` 
+- `import matrix.lib.*;`
 
 
-## Current version: 0.4
+## Current version: 0.5
