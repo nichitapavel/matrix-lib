@@ -66,7 +66,6 @@ public class MatrixFloatTest {
         } catch (Exception ex) {
             fail();
         }
-        TimeController time = new TimeController();
 
         AMatrix matrix_computed = matrix_a.multiply(matrix_b);
 
