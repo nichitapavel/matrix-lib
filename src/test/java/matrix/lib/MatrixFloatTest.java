@@ -67,12 +67,12 @@ public class MatrixFloatTest {
             fail();
         }
 
-        AMatrix matrix_computed = matrix_a.multiply(matrix_b);
+        MatrixFloat matrix_computed = (MatrixFloat) matrix_a.multiply(matrix_b);
 
         // assert statements
-        assertEquals(
+        assertTrue(
                 "Result of matrix multiplication must be equal to expected matrix",
-                matrix_expected, matrix_computed
+                matrix_expected.equals(matrix_computed, 4)
         );
     }
 }
