@@ -46,16 +46,34 @@ public class MatrixFloat extends AMatrix {
                 for (k = 0; k < this.size; k++) {
                     result += (float) this.array.get(i*this.size+k) * (float) matrix.array.get(k*this.size+j);
                 }
-                matrix_computed.array.add(
-                        // TODO Evaluate if this is really necessary
-                        BigDecimal.
-                                valueOf(result).
-                                setScale(4, BigDecimal.ROUND_HALF_UP).
-                                floatValue()
-                );
+                matrix_computed.array.add(result);
             }
         }
 
         return matrix_computed;
+    }
+
+    // TODO this is float specific implementation, but AMatrix.equals() still can be used, this means that two similar
+    // equals() methods can produce different results, this is counter intuitive, should make it more clear somehow
+    public boolean equals(Object o, int decimals) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AMatrix matrix = (AMatrix) o;
+
+        float floatFirstArray, floatSecondArray;
+        for (int i = 0; i < this.dimension; i++) {
+            floatFirstArray = BigDecimal.
+                    valueOf( ((Float) (this.array.get(i))).floatValue() ).
+                    setScale(decimals, BigDecimal.ROUND_HALF_UP).
+                    floatValue();
+            floatSecondArray = BigDecimal.
+                    valueOf( ((Float) (matrix.array.get(i))).floatValue() ).
+                    setScale(decimals, BigDecimal.ROUND_HALF_UP).
+                    floatValue();
+            if (floatFirstArray != floatSecondArray) {
+                return false;
+            }
+        }
+        return true;
     }
 }
