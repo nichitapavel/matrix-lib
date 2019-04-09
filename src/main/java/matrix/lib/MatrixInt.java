@@ -38,4 +38,9 @@ public class MatrixInt extends AMatrix {
 
         return matrix_computed;
     }
+
+    @Override
+    public AMatrix multiplyRoundUp(AMatrix matrix) {
+        return this.multiply(matrix);
+    }
 }

@@ -8,56 +8,56 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class MatrixFloatTest {
+    /*
+    Matrix A
+    2.35, 7.25, 5.78, 8.0, 4.33,
+    5.81, 0.0, 5.27, 2.85, 5.33,
+    6.42, 7.84, 9.63, 8.21, 7.45,
+    8.97, 5.47, 0.12, 1.74, 6.78,
+    7.99, 9.37, 2.0, 6.45, 4.18
+    Matrix B
+    2.45, 2.54, 0.54, 3.0, 4.24,
+    0.84, 0.19, 0.83, 2.61, 0.33,
+    1.71, 2.49, 4.18, 3.99, 2.23,
+    3.53, 0.5, 0.8, 1.49, 1.99,
+    2.15, 4.78, 2.14, 1.89, 4.35
+    Matrix C
+    59.2808, 46.4361, 47.1131, 69.1384, 60.0014,
+    44.7662, 54.7821, 38.8522, 52.7775, 65.2435,
+    83.7807, 81.4911, 72.7384, 104.4595, 100.0283,
+    47.4957, 57.4003, 25.7867, 57.0723, 73.0611,
+    62.6218, 50.2603, 34.5569, 73.9164, 72.4482
+    */
+    // FIXED TODO Update values to be correct
+    float[] matrix_a_data = {
+            2.35f, 7.25f, 5.78f, 8.0f, 4.33f,
+            5.81f, 0.0f, 5.27f, 2.85f, 5.33f,
+            6.42f, 7.84f, 9.63f, 8.21f, 7.45f,
+            8.97f, 5.47f, 0.12f, 1.74f, 6.78f,
+            7.99f, 9.37f, 2.0f, 6.45f, 4.18f
+    };
+    float[] matrix_b_data = {
+            2.45f, 2.54f, 0.54f, 3.0f, 4.24f,
+            0.84f, 0.19f, 0.83f, 2.61f, 0.33f,
+            1.71f, 2.49f, 4.18f, 3.99f, 2.23f,
+            3.53f, 0.5f, 0.8f, 1.49f, 1.99f,
+            2.15f, 4.78f, 2.14f, 1.89f, 4.35f
+    };
+    float[] matrix_expected_data = {
+            59.2808f, 46.4361f, 47.1131f, 69.1384f, 60.0014f,
+            44.7662f, 54.7821f, 38.8522f, 52.7775f, 65.2435f,
+            83.7807f, 81.4911f, 72.7384f, 104.4595f, 100.0283f,
+            47.4957f, 57.4003f, 25.7867f, 57.0723f, 73.0611f,
+            62.6218f, 50.2603f, 34.5569f, 73.9164f, 72.4482f
+    };
 
     @Test
     public void TestMatrixMultiplication() {
-        /*
-        Matrix B
-        2 7 5 8 4
-        5 0 5 2 5
-        6 7 9 8 7
-        8 5 0 1 6
-        7 9 2 6 4
-        Matrix B
-        2 2 0 3 4
-        0 0 0 2 0
-        1 2 4 3 2
-        3 0 0 1 1
-        2 4 2 1 4
-        Matrix C
-        41 30 28 47 42
-        31 40 30 37 52
-        59 58 50 74 78
-        31 40 12 41 57
-        42 34 16 55 54
-        */
+
         int size = 5;
         MatrixFloat matrix_a = new MatrixFloat(size);
         MatrixFloat matrix_b = new MatrixFloat(size);
         MatrixFloat matrix_expected = new MatrixFloat(size);
-
-        // FIXED TODO Update values to be correct
-        float[] matrix_a_data = {
-                2.35f, 7.25f, 5.78f, 8.0f, 4.33f,
-                5.81f, 0.0f, 5.27f, 2.85f, 5.33f,
-                6.42f, 7.84f, 9.63f, 8.21f, 7.45f,
-                8.97f, 5.47f, 0.12f, 1.74f, 6.78f,
-                7.99f, 9.37f, 2.0f, 6.45f, 4.18f
-        };
-        float[] matrix_b_data = {
-                2.45f, 2.54f, 0.54f, 3.0f, 4.24f,
-                0.84f, 0.19f, 0.83f, 2.61f, 0.33f,
-                1.71f, 2.49f, 4.18f, 3.99f, 2.23f,
-                3.53f, 0.5f, 0.8f, 1.49f, 1.99f,
-                2.15f, 4.78f, 2.14f, 1.89f, 4.35f
-        };
-        float[] matrix_expected_data = {
-                59.2808f, 46.4361f, 47.1131f, 69.1384f, 60.0014f,
-                44.7662f, 54.7821f, 38.8522f, 52.7775f, 65.2435f,
-                83.7807f, 81.4911f, 72.7384f, 104.4595f, 100.0283f,
-                47.4957f, 57.4003f, 25.7867f, 57.0723f, 73.0611f,
-                62.6218f, 50.2603f, 34.5569f, 73.9164f, 72.4482f
-        };
 
         try {
             matrix_a.set(matrix_a_data);
@@ -73,6 +73,31 @@ public class MatrixFloatTest {
         assertTrue(
                 "Result of matrix multiplication must be equal to expected matrix",
                 matrix_expected.equals(matrix_computed, 4)
+        );
+    }
+
+    @Test
+    public void TestMatrixMultiplicationRoundUp() {
+
+        int size = 5;
+        MatrixFloat matrix_a = new MatrixFloat(size);
+        MatrixFloat matrix_b = new MatrixFloat(size);
+        MatrixFloat matrix_expected = new MatrixFloat(size);
+
+        try {
+            matrix_a.set(matrix_a_data);
+            matrix_b.set(matrix_b_data);
+            matrix_expected.set(matrix_expected_data);
+        } catch (Exception ex) {
+            fail();
+        }
+
+        MatrixFloat matrix_computed = (MatrixFloat) matrix_a.multiplyRoundUp(matrix_b);
+
+        // assert statements
+        assertTrue(
+                "Result of matrix multiplication must be equal to expected matrix",
+                matrix_expected.equals(matrix_computed)
         );
     }
 }

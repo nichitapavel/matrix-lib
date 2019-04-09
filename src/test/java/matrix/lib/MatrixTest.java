@@ -12,7 +12,7 @@ public class MatrixTest {
     @Test
     public void TestMatrixMultiplication() {
         /*
-        Matrix B
+        Matrix A
         2 7 5 8 4
         5 0 5 2 5
         6 7 9 8 7

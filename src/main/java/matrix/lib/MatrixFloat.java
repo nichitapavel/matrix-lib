@@ -53,6 +53,29 @@ public class MatrixFloat extends AMatrix {
         return matrix_computed;
     }
 
+    @Override
+    public AMatrix multiplyRoundUp(AMatrix matrix) {
+        int i, j, k;
+        AMatrix matrix_computed = new MatrixFloat(this.size);
+
+        for (i = 0; i < this.size; i++) {
+            for (j = 0; j < this.size; j++) {
+                float result = 0.0f;
+                for (k = 0; k < this.size; k++) {
+                    result += (float) this.array.get(i*this.size+k) * (float) matrix.array.get(k*this.size+j);
+                }
+                matrix_computed.array.add(
+                        BigDecimal.
+                                valueOf(result).
+                                setScale(4, BigDecimal.ROUND_HALF_UP).
+                                floatValue()
+                );
+            }
+        }
+
+        return matrix_computed;
+    }
+
     // TODO this is float specific implementation, but AMatrix.equals() still can be used, this means that two similar
     // equals() methods can produce different results, this is counter intuitive, should make it more clear somehow
     public boolean equals(Object o, int decimals) {
