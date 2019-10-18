@@ -14,7 +14,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Initialize grade
-      run: ./gradlew init
+      run: ./gradlew wrapper
     - name: Assemble with Gradle with debug symbols
       run: ./gradlew assembleDebug
     - name: Assemble with Gradle w/o debug symbols
