@@ -25,6 +25,27 @@ jar {
 }
 
 
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(buildRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(buildDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
+    } else if (taskGraph.hasTask(installRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(installDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
+        jar.archiveFileName = version + '-debug'
+    }
+}
+
+task buildRelease(type: GradleBuild, dependsOn: build) {}
+task buildDebug(type: GradleBuild, dependsOn: build) {}
+
+task installRelease(type: GradleBuild, dependsOn: install) {}
+task installDebug(type: GradleBuild, dependsOn: install) {}
+
 
 repositories {
     // Use jcenter for resolving your dependencies.
