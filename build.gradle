@@ -36,12 +36,19 @@ gradle.taskGraph.whenReady { taskGraph ->
     } else if (taskGraph.hasTask(installDebug)) {
         compileJava.options.debug = true
         project.version = version + '-debug'
-        jar.archiveFileName = version + '-debug'
+    } else if (taskGraph.hasTask(assembleRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(assembleDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
     }
 }
 
 task buildRelease(type: GradleBuild, dependsOn: build) {}
 task buildDebug(type: GradleBuild, dependsOn: build) {}
+
+task assembleRelease(type: GradleBuild, dependsOn: assemble) {}
+task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
 
 task installRelease(type: GradleBuild, dependsOn: install) {}
 task installDebug(type: GradleBuild, dependsOn: install) {}
