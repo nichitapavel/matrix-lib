@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Build lib with and w/o debug symbols
+    name: Assemble lib
     runs-on: ubuntu-18.04
 
     steps:
@@ -13,6 +13,8 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Initialize grade
+      run: ./gradle init
     - name: Assemble with Gradle with debug symbols
       run: ./gradlew assembleDebug
     - name: Assemble with Gradle w/o debug symbols
