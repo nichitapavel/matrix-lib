@@ -14,7 +14,7 @@ plugins {
 }
 
 group 'es.ull.hpcg'
-version '0.5.2'
+version '0.5.3-beta-05'
 
 ext.GitHubPackagesClosure = {
     name = 'GitHubPackages'
