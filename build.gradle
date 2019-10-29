@@ -18,9 +18,11 @@ version '0.5.2'
 
 jar {
     manifest {
-        attributes('Implementation-Title': project.name,
+        attributes(
+                'Implementation-Title': project.name,
                 'Implementation-Group': project.group,
-                'Implementation-Version': project.version)
+                'Implementation-Version': project.version
+        )
     }
 }
 
@@ -72,6 +74,5 @@ task javadocJar(type: Jar) {
 }
 
 dependencies {
-    // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
