@@ -10,20 +10,66 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
     id 'maven'
+    id 'maven-publish'
 }
 
 group 'es.ull.hpcg'
-version '0.5.2'
+version '0.5.3-beta-05'
 
-
-jar {
-    manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Group': project.group,
-                'Implementation-Version': project.version)
+ext.GitHubPackagesClosure = {
+    name = 'GitHubPackages'
+    url = uri('https://maven.pkg.github.com/HPC-ULL/SBCs-EnergyEfficiency')
+    credentials {
+        username = project.findProperty('gpr.user') ?: System.getenv('GPR_USER')
+        password = project.findProperty('gpr.key') ?: System.getenv('GPR_API_KEY')
     }
 }
 
+// helper function to return a "curried" closure
+Closure GitHubPackages() {
+    return GitHubPackagesClosure.curry()
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    mavenLocal()
+    maven GitHubPackages()
+}
+
+task sourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    repositories {
+        maven GitHubPackages()
+    }
+    publications {
+        gpr(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Group': project.group,
+                'Implementation-Version': project.version
+        )
+    }
+}
 
 gradle.taskGraph.whenReady { taskGraph ->
     if (taskGraph.hasTask(buildRelease)) {
@@ -53,15 +99,6 @@ task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
 task installRelease(type: GradleBuild, dependsOn: install) {}
 task installDebug(type: GradleBuild, dependsOn: install) {}
 
-
-repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
-    mavenLocal()
-}
-
 dependencies {
-    // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
