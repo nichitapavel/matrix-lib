@@ -30,46 +30,6 @@ Closure GitHubPackages() {
     return GitHubPackagesClosure.curry()
 }
 
-jar {
-    manifest {
-        attributes(
-                'Implementation-Title': project.name,
-                'Implementation-Group': project.group,
-                'Implementation-Version': project.version
-        )
-    }
-}
-
-
-gradle.taskGraph.whenReady { taskGraph ->
-    if (taskGraph.hasTask(buildRelease)) {
-        compileJava.options.debug = false
-    } else if (taskGraph.hasTask(buildDebug)) {
-        compileJava.options.debug = true
-        project.version = version + '-debug'
-    } else if (taskGraph.hasTask(installRelease)) {
-        compileJava.options.debug = false
-    } else if (taskGraph.hasTask(installDebug)) {
-        compileJava.options.debug = true
-        project.version = version + '-debug'
-    } else if (taskGraph.hasTask(assembleRelease)) {
-        compileJava.options.debug = false
-    } else if (taskGraph.hasTask(assembleDebug)) {
-        compileJava.options.debug = true
-        project.version = version + '-debug'
-    }
-}
-
-task buildRelease(type: GradleBuild, dependsOn: build) {}
-task buildDebug(type: GradleBuild, dependsOn: build) {}
-
-task assembleRelease(type: GradleBuild, dependsOn: assemble) {}
-task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
-
-task installRelease(type: GradleBuild, dependsOn: install) {}
-task installDebug(type: GradleBuild, dependsOn: install) {}
-
-
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -100,6 +60,44 @@ publishing {
         }
     }
 }
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': project.name,
+                'Implementation-Group': project.group,
+                'Implementation-Version': project.version
+        )
+    }
+}
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(buildRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(buildDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
+    } else if (taskGraph.hasTask(installRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(installDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
+    } else if (taskGraph.hasTask(assembleRelease)) {
+        compileJava.options.debug = false
+    } else if (taskGraph.hasTask(assembleDebug)) {
+        compileJava.options.debug = true
+        project.version = version + '-debug'
+    }
+}
+
+task buildRelease(type: GradleBuild, dependsOn: build) {}
+task buildDebug(type: GradleBuild, dependsOn: build) {}
+
+task assembleRelease(type: GradleBuild, dependsOn: assemble) {}
+task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
+
+task installRelease(type: GradleBuild, dependsOn: install) {}
+task installDebug(type: GradleBuild, dependsOn: install) {}
 
 dependencies {
     testImplementation 'junit:junit:4.12'
