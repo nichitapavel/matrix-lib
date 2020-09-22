@@ -28,7 +28,7 @@ public class Matrix {
 
     public void set(int[] array_data) throws Exception {
         if (array_data.length != this.dimension)
-            throw new Exception("Matrix dimension and array length does not match.");
+            throw new Exception("Matrix dimension and array length does not match, only square matrices.");
         for (int item : array_data)
             if (this.array != null) {
                 this.array.add(item);
