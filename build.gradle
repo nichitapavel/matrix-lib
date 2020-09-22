@@ -9,12 +9,11 @@
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
-    id 'maven'
     id 'maven-publish'
 }
 
 group 'es.ull.hpcg'
-version '0.5.3-beta-05'
+version '0.6'
 
 ext.GitHubPackagesClosure = {
     name = 'GitHubPackages'
@@ -77,11 +76,6 @@ gradle.taskGraph.whenReady { taskGraph ->
     } else if (taskGraph.hasTask(buildDebug)) {
         compileJava.options.debug = true
         project.version = version + '-debug'
-    } else if (taskGraph.hasTask(installRelease)) {
-        compileJava.options.debug = false
-    } else if (taskGraph.hasTask(installDebug)) {
-        compileJava.options.debug = true
-        project.version = version + '-debug'
     } else if (taskGraph.hasTask(assembleRelease)) {
         compileJava.options.debug = false
     } else if (taskGraph.hasTask(assembleDebug)) {
@@ -95,9 +89,6 @@ task buildDebug(type: GradleBuild, dependsOn: build) {}
 
 task assembleRelease(type: GradleBuild, dependsOn: assemble) {}
 task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
-
-task installRelease(type: GradleBuild, dependsOn: install) {}
-task installDebug(type: GradleBuild, dependsOn: install) {}
 
 dependencies {
     testImplementation 'junit:junit:4.12'
