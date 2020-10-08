@@ -1,12 +1,18 @@
 package matrix.lib;
 
-import org.junit.*;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 public class HTTPDataTest {
-
 
 
     @Test
@@ -36,13 +42,34 @@ public class HTTPDataTest {
         String base_url = "http://localhost:5000/message";
         HTTPData req = new HTTPData(base_url);
 
+        // Mock a HttpURLConnection or HTTPDataTest or URL object
+        // When method sendData() is invoked
+        // Return response code 200
+        //
+        // When req.sendData() a new HttpURLConnection is returned by
+        // URL.openConnection() and the getResponse() is executed by it
+        // and not by the mocked HttpURLConnection...
+        // study more...
+        HttpURLConnection httpURLConnectionMock = Mockito.mock(HttpURLConnection.class);
+
         TimeController tc = new TimeController();
         tc.snapStart();
 
         req.setData(tc.getStart(), Operation.AS);
 
+        try {
+            when(httpURLConnectionMock.getResponseCode()).thenReturn(200);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         // TODO the server must be running, learn tu make mocks you moth.....
         assertTrue(req.sendData());
-
+        try {
+            verify(httpURLConnectionMock.getResponseCode());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
