@@ -84,6 +84,18 @@ gradle.taskGraph.whenReady { taskGraph ->
     }
 }
 
+// https://docs.gradle.org/current/dsl/org.gradle.api.tasks.testing.Test.html
+// Overwrite test task
+// Add system properties to remove nashorn warning
+// and level down mockserver logs
+// there is one thing i don't understand
+// WHY THERE IS A gradle.properties FILE IF IT DOESN'T CHANGE THE SYSTEM PROPERTIES¿?
+// https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+test {
+    systemProperty 'nashorn.args', '--no-deprecation-warning'
+    systemProperty 'mockserver.logLevel', 'WARN'
+}
+
 task buildRelease(type: GradleBuild, dependsOn: build) {}
 task buildDebug(type: GradleBuild, dependsOn: build) {}
 
@@ -92,5 +104,7 @@ task assembleDebug(type: GradleBuild, dependsOn: assemble) {}
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '2.1.0'
+    testImplementation 'org.mock-server:mockserver-junit-rule:5.11.1'
+    // https://www.mock-server.com/mock_server/debugging_issues.html#logging_with_api
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
 }
